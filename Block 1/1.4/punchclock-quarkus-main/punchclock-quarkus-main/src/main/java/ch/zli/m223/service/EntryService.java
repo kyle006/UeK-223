@@ -1,18 +1,22 @@
 package ch.zli.m223.service;
 
-import java.util.List;
+import ch.zli.m223.model.Entry;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-
-import ch.zli.m223.model.Entry;
+import javax.persistence.EntityManager;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class EntryService {
     @Inject
     private EntityManager entityManager;
+    @Inject
+    TimeSummaryService timeSummaryService;
 
     @Transactional
     public Entry createEntry(Entry entry) {
@@ -48,5 +52,12 @@ public class EntryService {
         entry.setCheckOut(updatedEntry.getCheckOut());
         entityManager.merge(entry);
         return entry;
+    }
+
+
+    @Transactional
+    public Map<LocalDate, Duration> getTimeSummaries() {
+        List<Entry> entries = findAll();
+        return timeSummaryService.calculateSummaryPerDay(entries);
     }
 }
