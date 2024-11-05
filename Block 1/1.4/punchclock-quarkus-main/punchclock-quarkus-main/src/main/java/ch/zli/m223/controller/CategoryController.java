@@ -36,6 +36,17 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+        summary = "Get a category by ID.", 
+        description = "Returns a category by its ID."
+    )
+    public Category getCategoryById(@PathParam("id") Long id) {
+        return categoryService.findById(id);
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

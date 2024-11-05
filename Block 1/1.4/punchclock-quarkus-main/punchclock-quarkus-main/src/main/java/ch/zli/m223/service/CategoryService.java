@@ -25,6 +25,11 @@ public class CategoryService {
     }
 
     @Transactional
+    public Category findById(Long id) {
+        return entityManager.find(Category.class, id);
+    }
+
+    @Transactional
     public void deleteCategory(Long id) {
         var category = entityManager.find(Category.class, id);
         if (category == null) {

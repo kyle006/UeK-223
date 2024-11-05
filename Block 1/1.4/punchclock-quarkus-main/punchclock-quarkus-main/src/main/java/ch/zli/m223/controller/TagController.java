@@ -36,6 +36,17 @@ public class TagController {
         return tagService.findAll();
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+        summary = "Get a tag by ID.", 
+        description = "Returns a tag by its ID."
+    )
+    public Tag getTagById(@PathParam("id") Long id) {
+        return tagService.findById(id);
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

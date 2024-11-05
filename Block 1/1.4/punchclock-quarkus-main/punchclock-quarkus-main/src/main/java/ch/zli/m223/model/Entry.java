@@ -1,13 +1,10 @@
 package ch.zli.m223.model;
 
 import javax.persistence.*;
-
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -26,6 +23,7 @@ public class Entry {
 
   @ManyToOne(optional = false)
   @Fetch(FetchMode.JOIN)
+  @JsonIgnoreProperties("entries")
   private Category category;
 
   @ManyToMany

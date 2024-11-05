@@ -18,6 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import ch.zli.m223.model.Entry;
 import ch.zli.m223.service.EntryService;
+import ch.zli.m223.service.TagService;
 
 @Path("/entries")
 @Tag(name = "Entries", description = "Handling of entries")
@@ -25,7 +26,9 @@ public class EntryController {
 
     @Inject
     EntryService entryService;
-
+    @Inject
+    TagService tagService;
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
@@ -34,6 +37,17 @@ public class EntryController {
     )
     public List<Entry> index() {
         return entryService.findAll();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+        summary = "Get a tag by ID.", 
+        description = "Returns a tag by its ID."
+    )
+    public Entry getTagById(@PathParam("id") Long id) {
+        return entryService.findById(id);
     }
 
     @POST

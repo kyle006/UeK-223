@@ -25,6 +25,11 @@ public class TagService {
     }
 
     @Transactional
+    public Tag findById(Long id) {
+        return entityManager.find(Tag.class, id);
+    }
+
+    @Transactional
     public void deleteTag(Long id) {
         var tag = entityManager.find(Tag.class, id);
         if (tag == null) {
