@@ -1,42 +1,56 @@
 package ch.zli.m223.model;
 
-import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Schema(readOnly = true)
+  private Long id;
 
-    @Column(nullable = false)
-    private String title;
+  @Column(nullable = false)
+  private String title;
 
-    @OneToMany(mappedBy = "category")
-    private List<Entry> entries;
+  @OneToMany(mappedBy = "category")
+  @JsonIgnoreProperties("category")
+  @Fetch(FetchMode.JOIN)
+  private Set<Entry> entries;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public List<Entry> getEntries() {
-        return entries;
-    }
+  public Set<Entry> getEntries() {
+    return entries;
+  }
 
-    public void setEntries(List<Entry> entries) {
-        this.entries = entries;
-    }
+  public void setEntries(Set<Entry> entries) {
+    this.entries = entries;
+  }
 }

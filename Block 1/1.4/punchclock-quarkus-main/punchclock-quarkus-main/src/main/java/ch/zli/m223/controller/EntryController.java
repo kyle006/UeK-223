@@ -28,7 +28,10 @@ public class EntryController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Index all Entries.", description = "Returns a list of all entries.")
+    @Operation(
+        summary = "Index all entries.", 
+        description = "Returns a list of all entries."
+    )
     public List<Entry> index() {
         return entryService.findAll();
     }
@@ -36,25 +39,32 @@ public class EntryController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Creates a new entry.", description = "Creates a new entry and returns the newly added entry.")
+    @Operation(
+        summary = "Creates a new entry.", 
+        description = "Creates a new entry and returns the newly added entry."
+    )
     public Entry create(Entry entry) {
        return entryService.createEntry(entry);
     }
 
-    @DELETE
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Deletes an entry.", description = "Deletes an entry by ID.")
+    @DELETE
+    @Operation(
+        summary = "Deletes an entry.",
+        description = "Deletes an entry by its id."
+    )
     public void delete(@PathParam("id") Long id) {
         entryService.deleteEntry(id);
     }
 
-    @PUT
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Updates an entry.", description = "Updates an entry by ID.")
+    @PUT
+    @Operation(
+        summary = "Updates an entry.",
+        description = "Updates an entry by its id."
+    )
     public Entry update(@PathParam("id") Long id, Entry entry) {
         return entryService.updateEntry(id, entry);
     }
+
 }
