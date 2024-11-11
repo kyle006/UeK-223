@@ -2,5 +2,5 @@
 *.doc
 *.docx
 *.pdf
-privateKey.pem
-publicKey.pem
+private.key
+public.key
