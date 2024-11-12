@@ -36,6 +36,9 @@ public class Entry {
   @Fetch(FetchMode.JOIN)
   private Set<Tag> tags;
 
+  @Column(nullable = true)
+  private String description;
+
   public Long getId() {
     return id;
   }
@@ -77,7 +80,7 @@ public class Entry {
   }
 
   @Schema(hidden = true)
-  private boolean isCheckOutAfterCheckIn() {
+public boolean isCheckOutAfterCheckIn() {
     return this.checkOut.isAfter(this.checkIn);
   }
 }
