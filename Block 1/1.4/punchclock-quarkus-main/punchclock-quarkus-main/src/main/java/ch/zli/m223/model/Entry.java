@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Entity
 public class Entry {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Schema(readOnly = true)
@@ -28,9 +29,9 @@ public class Entry {
 
   @ManyToMany
   @JoinTable(
-    name = "entry_tags",
-    joinColumns = @JoinColumn(name = "entry_id"),
-    inverseJoinColumns = @JoinColumn(name = "tag_id")
+  name = "entry_tags",
+  joinColumns = @JoinColumn(name = "entry_id"),
+  inverseJoinColumns = @JoinColumn(name = "tag_id")
   )
   @JsonIgnoreProperties("entries")
   @Fetch(FetchMode.JOIN)
@@ -39,48 +40,57 @@ public class Entry {
   @Column(nullable = true)
   private String description;
 
+  // Getters and Setters
   public Long getId() {
-    return id;
+  return id;
   }
 
   public void setId(Long id) {
-    this.id = id;
+  this.id = id;
   }
 
   public LocalDateTime getCheckIn() {
-    return checkIn;
+  return checkIn;
   }
 
   public void setCheckIn(LocalDateTime checkIn) {
-    this.checkIn = checkIn;
+  this.checkIn = checkIn;
   }
 
   public LocalDateTime getCheckOut() {
-    return checkOut;
+  return checkOut;
   }
 
   public void setCheckOut(LocalDateTime checkOut) {
-    this.checkOut = checkOut;
+  this.checkOut = checkOut;
   }
 
   public Category getCategory() {
-    return category;
+  return category;
   }
 
   public void setCategory(Category category) {
-    this.category = category;
+  this.category = category;
   }
 
   public Set<Tag> getTags() {
-    return tags;
+  return tags;
   }
 
   public void setTags(Set<Tag> tags) {
-    this.tags = tags;
+  this.tags = tags;
+  }
+
+  public String getDescription() {
+  return description;
+  }
+
+  public void setDescription(String description) {
+  this.description = description;
   }
 
   @Schema(hidden = true)
-public boolean isCheckOutAfterCheckIn() {
-    return this.checkOut.isAfter(this.checkIn);
+  public boolean isCheckOutAfterCheckIn() {
+  return this.checkOut.isAfter(this.checkIn);
   }
 }
