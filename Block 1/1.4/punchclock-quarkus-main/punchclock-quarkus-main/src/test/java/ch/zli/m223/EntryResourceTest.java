@@ -30,17 +30,17 @@ public class EntryResourceTest {
     }
 
     @Test
-  public void testCheckOutAfterCheckIn2() {
-    // Arrange
-    Entry entry = new Entry();
-    entry.setCheckIn(LocalDateTime.of(2023, 10, 1, 10, 0));
-    entry.setCheckOut(LocalDateTime.of(2023, 10, 1, 12, 0));
+    public void givenCheckOutIsNull() {
+        // Given
+        Entry entry = new Entry();
+        LocalDateTime checkIn = LocalDateTime.of(2023, 10, 1, 10, 0);
+        entry.setCheckIn(checkIn);
+        entry.setCheckOut(null);
 
-    // Act
-    boolean result = entry.isCheckOutAfterCheckIn();
+        // When
+        LocalDateTime checkOut = entry.getCheckOut();
 
-    // Assert
-    assertTrue(result, "Check-out should be after check-in");
-  }
-
+        // Then
+        assertNull(checkOut, "Check-out should be null");
+    }
 }
